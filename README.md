@@ -37,7 +37,7 @@ Make sure you have the following installed on your local machine:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/stefanomagoni/PizzaDelivery.git
+   git clone https://github.com/StefanM14/PizzaDelivery.git
    cd PizzaDelivery
    ```
 
@@ -72,7 +72,7 @@ The application models the delivery process as a Capacitated Vehicle Routing Pro
 4. **Output:** The optimized routes are printed to the console and exported into a visual HTML format.
 
 ## 🤝 Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/stefanomagoni/PizzaDelivery/issues).
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/StefanM14/PizzaDelivery/issues).
 
 ## 📝 License
 This project is open-source and available under the [MIT License](LICENSE).
