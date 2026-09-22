@@ -1,0 +1,164 @@
+{
+  "depot": {
+    "name": "Pizzeria Orzinuovi (Piazza Vittorio Emanuele II)",
+    "location": {
+      "name": "Piazza Vittorio Emanuele II, Orzinuovi",
+      "latitude": 45.4012,
+      "longitude": 9.9248
+    }
+  },
+  "riders": [
+    {
+      "id": "Rider-Marco",
+      "pizzaCapacity": 8,
+      "shiftStart": "19:00:00",
+      "shiftEnd": "21:30:00"
+    },
+    {
+      "id": "Rider-Luca",
+      "pizzaCapacity": 8,
+      "shiftStart": "19:00:00",
+      "shiftEnd": "21:30:00"
+    },
+    {
+      "id": "Rider-Andrea",
+      "pizzaCapacity": 8,
+      "shiftStart": "19:00:00",
+      "shiftEnd": "21:30:00"
+    }
+  ],
+  "orders": [
+    {
+      "id": "ORD-01",
+      "destination": {
+        "name": "Via Roma 12, Orzinuovi",
+        "latitude": 45.4028,
+        "longitude": 9.9235
+      },
+      "readyTime": "19:05:00",
+      "deadlineTime": "19:40:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-02",
+      "destination": {
+        "name": "Viale Bainsizza 5, Orzinuovi",
+        "latitude": 45.4042,
+        "longitude": 9.9195
+      },
+      "readyTime": "19:10:00",
+      "deadlineTime": "19:45:00",
+      "pizzaCount": 2
+    },
+    {
+      "id": "ORD-03",
+      "destination": {
+        "name": "Via Cavour 18, Orzinuovi",
+        "latitude": 45.3992,
+        "longitude": 9.9260
+      },
+      "readyTime": "19:10:00",
+      "deadlineTime": "19:45:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-04",
+      "destination": {
+        "name": "Via Castello 8, Barco",
+        "latitude": 45.4215,
+        "longitude": 9.9455
+      },
+      "readyTime": "19:15:00",
+      "deadlineTime": "19:55:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-05",
+      "destination": {
+        "name": "Via Villanuova 3, Barco",
+        "latitude": 45.4258,
+        "longitude": 9.9408
+      },
+      "readyTime": "19:20:00",
+      "deadlineTime": "20:00:00",
+      "pizzaCount": 2
+    },
+    {
+      "id": "ORD-06",
+      "destination": {
+        "name": "Cascina Pudiano 4, Pudiano",
+        "latitude": 45.4338,
+        "longitude": 9.9215
+      },
+      "readyTime": "19:25:00",
+      "deadlineTime": "20:10:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-07",
+      "destination": {
+        "name": "SP Pudiano 14, Pudiano",
+        "latitude": 45.4375,
+        "longitude": 9.9185
+      },
+      "readyTime": "19:30:00",
+      "deadlineTime": "20:15:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-08",
+      "destination": {
+        "name": "Via Francesca 24, Orzinuovi",
+        "latitude": 45.3978,
+        "longitude": 9.9205
+      },
+      "readyTime": "19:30:00",
+      "deadlineTime": "20:10:00",
+      "pizzaCount": 2
+    },
+    {
+      "id": "ORD-09",
+      "destination": {
+        "name": "Via Coniolo Centro 11, Coniolo",
+        "latitude": 45.3852,
+        "longitude": 9.9518
+      },
+      "readyTime": "19:35:00",
+      "deadlineTime": "20:20:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-10",
+      "destination": {
+        "name": "Via Molino 6, Coniolo",
+        "latitude": 45.3880,
+        "longitude": 9.9475
+      },
+      "readyTime": "19:40:00",
+      "deadlineTime": "20:25:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-11",
+      "destination": {
+        "name": "Via Lonato 9, Orzinuovi",
+        "latitude": 45.4058,
+        "longitude": 9.9275
+      },
+      "readyTime": "19:45:00",
+      "deadlineTime": "20:30:00",
+      "pizzaCount": 1
+    },
+    {
+      "id": "ORD-12",
+      "destination": {
+        "name": "Via Ovanengo 7, Ovanengo",
+        "latitude": 45.4118,
+        "longitude": 9.8975
+      },
+      "readyTime": "19:50:00",
+      "deadlineTime": "20:40:00",
+      "pizzaCount": 1
+    }
+  ]
+}
