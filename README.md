@@ -4,13 +4,18 @@
 ![Maven](https://img.shields.io/badge/maven-3.5+-C71A22.svg)
 ![OR-Tools](https://img.shields.io/badge/Google_OR--Tools-Optimization-4285F4.svg)
 ![JUnit](https://img.shields.io/badge/JUnit-5-25A162.svg)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Interactive_Map-orange?style=flat&logo=leaflet)](https://StefanM14.github.io/PizzaDelivery/)
 
 ## 📌 Overview
 The **Pizza Delivery Route Optimizer** is a Java-based application designed to solve the Vehicle Routing Problem (VRP) for pizza delivery. 
 It calculates the most efficient routes for delivery drivers, ensuring that pizzas are delivered as quickly as possible while minimizing the total distance and travel time. The application outputs an interactive HTML map for easy visualization of the optimized routes.
 
+👉 **[Experience the Live Interactive Map Demo Here](https://StefanM14.github.io/PizzaDelivery/)**
+
 <p align="center">
-  <img src="delivery-map-screenshot.png" alt="Delivery Map Screenshot" width="800">
+  <a href="https://StefanM14.github.io/PizzaDelivery/">
+    <img src="delivery-map-screenshot.png" alt="Delivery Map Screenshot" width="800">
+  </a>
 </p>
 
 ## ✨ Key Features
