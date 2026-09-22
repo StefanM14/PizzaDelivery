@@ -1,19 +1,19 @@
 # 🍕 Pizza Delivery Route Optimizer
 
-![Java](https://img.shields.io/badge/java-21-blue.svg)
-![Maven](https://img.shields.io/badge/maven-3.5+-C71A22.svg)
-![OR-Tools](https://img.shields.io/badge/Google_OR--Tools-Optimization-4285F4.svg)
-![JUnit](https://img.shields.io/badge/JUnit-5-25A162.svg)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-Interactive_Map-orange?style=flat&logo=leaflet)](https://StefanM14.github.io/PizzaDelivery/)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-brightgreen?logo=github&style=flat-square)](https://stefanm14.github.io/PizzaDelivery/)
+![Java](https://img.shields.io/badge/java-21-blue.svg?style=flat-square)
+![Maven](https://img.shields.io/badge/maven-3.5+-C71A22.svg?style=flat-square)
+![OR-Tools](https://img.shields.io/badge/Google_OR--Tools-Optimization-4285F4.svg?style=flat-square)
+![JUnit](https://img.shields.io/badge/JUnit-5-25A162.svg?style=flat-square)
 
 ## 📌 Overview
-The **Pizza Delivery Route Optimizer** is a Java-based application designed to solve the Vehicle Routing Problem (VRP) for pizza delivery. 
-It calculates the most efficient routes for delivery drivers, ensuring that pizzas are delivered as quickly as possible while minimizing the total distance and travel time. The application outputs an interactive HTML map for easy visualization of the optimized routes.
+The **Pizza Delivery Route Optimizer** is a Java-based application designed to solve the Vehicle Routing Problem with Time Windows (VRPTW) for pizza delivery. 
+It calculates the most efficient routes for delivery drivers, ensuring pizzas are delivered as quickly as possible while minimizing total distance, travel time, and delivery delays. 
 
-👉 **[Experience the Live Interactive Map Demo Here](https://StefanM14.github.io/PizzaDelivery/)**
+👉 **[Explore the Live Interactive Route Map](https://stefanm14.github.io/PizzaDelivery/)**
 
 <p align="center">
-  <a href="https://StefanM14.github.io/PizzaDelivery/">
+  <a href="https://stefanm14.github.io/PizzaDelivery/">
     <img src="delivery-map-screenshot.png" alt="Delivery Map Screenshot" width="800">
   </a>
 </p>
@@ -76,5 +76,8 @@ The application models the delivery process as a Capacitated Vehicle Routing Pro
 3. **Optimization:** Google OR-Tools calculates the best assignment of orders to drivers, minimizing the global cost.
 4. **Output:** The optimized routes are printed to the console and exported into a visual HTML format.
 
+## 🤝 Contributing
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/StefanM14/PizzaDelivery/issues).
+
 ## 📝 License
-This project is open-source
+This project is open-source and available under the [MIT License](LICENSE).
