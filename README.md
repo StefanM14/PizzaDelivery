@@ -71,8 +71,5 @@ The application models the delivery process as a Capacitated Vehicle Routing Pro
 3. **Optimization:** Google OR-Tools calculates the best assignment of orders to drivers, minimizing the global cost.
 4. **Output:** The optimized routes are printed to the console and exported into a visual HTML format.
 
-## 🤝 Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/StefanM14/PizzaDelivery/issues).
-
 ## 📝 License
-This project is open-source and available under the [MIT License](LICENSE).
+This project is open-source
