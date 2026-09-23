@@ -1,4 +1,4 @@
-# 🍕 Pizza Delivery Route Optimizer
+# 🍕 Pizza Delivery Route Optimizer — Pizzeria Il Cantinone
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-brightgreen?logo=github&style=flat-square)](https://stefanm14.github.io/PizzaDelivery/)
 ![Java](https://img.shields.io/badge/java-21-blue.svg?style=flat-square)
@@ -6,9 +6,7 @@
 ![OR-Tools](https://img.shields.io/badge/Google_OR--Tools-Optimization-4285F4.svg?style=flat-square)
 ![JUnit](https://img.shields.io/badge/JUnit-5-25A162.svg?style=flat-square)
 
-## 📌 Overview
-The **Pizza Delivery Route Optimizer** is a Java-based application designed to solve the Vehicle Routing Problem with Time Windows (VRPTW) for pizza delivery. 
-It calculates the most efficient routes for delivery drivers, ensuring pizzas are delivered as quickly as possible while minimizing total distance, travel time, and delivery delays. 
+An Operations Research & Combinatorial Optimization system solving the **Vehicle Routing Problem with Time Windows (VRPTW)** under strict thermal freshness and kitchen synchronization constraints.
 
 👉 **[Explore the Live Interactive Route Map](https://stefanm14.github.io/PizzaDelivery/)**
 
@@ -18,66 +16,114 @@ It calculates the most efficient routes for delivery drivers, ensuring pizzas ar
   </a>
 </p>
 
-## ✨ Key Features
-- **Route Optimization:** Utilizes **Google OR-Tools** to compute the optimal delivery routes.
-- **JSON Data Processing:** Seamlessly parses input orders and locations using **Jackson**.
-- **Interactive Visualization:** Automatically generates an interactive map (`delivery-map.html`) to visualize the delivery points and calculated paths.
-- **High Test Coverage:** Business logic and algorithms are tested using **JUnit 5**.
+---
 
-## 🛠️ Technology Stack
-- **Language:** Java 21
-- **Build Tool:** Maven
-- **Core Optimization Engine:** Google OR-Tools
-- **JSON Parsing:** Jackson (`jackson-databind`, `jackson-datatype-jsr310`)
-- **Testing:** JUnit 5
+## 📌 Origin & Real-World Motivation: *Pizzeria Il Cantinone*
+
+This project is not an abstract academic exercise or a generic toy model. It was conceived and built to solve a concrete, daily operational bottleneck at my family's business, **Pizzeria Il Cantinone**, located in my hometown of **Orzinuovi** (Brescia, Northern Italy).
+
+### The Operational Challenge in Orzinuovi
+During peak weekend dinner rush hours (19:00 – 21:30), *Il Cantinone* manages dozens of home deliveries that span both the dense historic town center and remote agricultural hamlets (*frazioni*) several kilometers away, such as **Barco**, **Pudiano**, **Coniolo**, and **Ovanengo**.
+
+Historically, dispatching was performed manually under high stress, leading to:
+- **Sub-optimal routing:** Drivers crisscrossing the territory and driving redundant kilometers.
+- **Thermal quality degradation:** Artisan pizzas cooling down in transit if routes exceeded 30–35 minutes.
+- **Kitchen desynchronization:** Drivers departing before batches were fully baked, or pizzas waiting under heat lamps.
+- **Customer tardiness:** Deliveries arriving outside promised time slots during peak oven bottlenecks.
+
+To solve this, I designed and implemented this automated optimization engine, formulating *Il Cantinone*'s operations as a multi-constrained **Capacitated Vehicle Routing Problem with Time Windows (CVRPTW)** backed by real road network topology.
+
+---
+
+## 🔬 Mathematical Formulation & Domain Constraints
+
+The system models the delivery network as a complete directed graph $G = (V, A)$, where vertex $0$ represents the pizzeria depot (Piazza Vittorio Emanuele II, Orzinuovi) and $V \setminus \{0\} = \{1, \dots, n\}$ represents customer orders. A fleet of riders $K = \{1, \dots, m\}$ serves the demand.
+
+### 1. Objective Function
+Minimize the global cost function combining cumulative travel duration across all active routes and a penalty for any tardiness beyond customer deadlines:
+
+$$\min \quad \sum_{k \in K} \sum_{(i,j) \in A} c_{ij} \, x_{ijk} + \lambda \sum_{i \in V \setminus \{0\}} \max\left(0, T_i - d_i\right)$$
+
+Where:
+- $c_{ij}$: Real driving travel duration from node $i$ to node $j$ (queried via OSRM).
+- $x_{ijk} \in \{0, 1\}$: Binary decision variable indicating if rider $k$ travels directly from $i$ to $j$.
+- $T_i$: Arrival time at customer $i$.
+- $d_i$: Promised customer deadline.
+- $\lambda$: High penalty factor for tardiness ($\lambda = 5000\text{ cost units/sec}$).
+
+### 2. Operational Constraints
+* **Vehicle Thermal Bag Capacity (Hard):** Each rider carries insulated thermal boxes holding up to $Q_k = 8$ pizzas:
+  $$\sum_{i \in V \setminus \{0\}} q_i \, y_{ik} \le Q_k \quad \forall k \in K$$
+* **Kitchen Oven Synchronization (Hard):** A rider cannot depart the pizzeria until **all** pizzas assigned to their route have finished baking in the wood-fired oven:
+  $$T_{\text{start}, k} \ge \max_{i \in \text{Route}(k)} (\text{readyTime}_i) \quad \forall k \in K$$
+* **Customer Time Windows (Soft with heavy penalty):** Orders must arrive within the agreed delivery window $[e_i, d_i]$. Early arrivals wait; late arrivals incur heavy penalties.
+* **Thermal Freshness Preservation:** To preserve crust texture and mozzarella temperature, an order's elapsed transit time from oven exit to doorstep is constrained:
+  $$T_i - \text{readyTime}_i \le 35\text{ minutes}$$
+* **Rider Shift Windows (Hard):** Riders must return to the depot in Piazza Vittorio Emanuele II before their scheduled shift ends:
+  $$T_{\text{end}, k} \le \text{shiftEnd}_k \quad \forall k \in K$$
+
+---
+
+## 🛠️ Technology Stack & Architecture
+
+- **Language & Runtime:** Java 21 (Records, pattern matching, modern `java.net.http.HttpClient`, `java.time`)
+- **Optimization Engine:** **Google OR-Tools** (Constraint Programming / Routing Library)
+  - *Initial Solution:* Path Cheapest Arc (`PATH_CHEAPEST_ARC`)
+  - *Metaheuristic:* Guided Local Search (`GUIDED_LOCAL_SEARCH`) for escaping local minima in complex time-window landscapes.
+- **Routing & Geodesics:**
+  - **OSRM (Open Source Routing Machine) Table Service:** Live highway driving distance and duration matrices computed on actual road networks.
+  - **In-Memory Cache & Geodesic Fallback:** Thread-safe matrix caching with an automated Haversine detour model ($factor = 1.35$) if public routing nodes are unreachable.
+- **Data Serialization:** Jackson (`jackson-databind`, `jackson-datatype-jsr310`)
+- **Testing:** **JUnit 5** with parameterized tests validating capacity limits, time-window compliance, and edge cases.
+- **Visualization:** Leaflet.js interactive maps with dynamic color-coded polyline itineraries, popup details, and summary statistics.
+
+---
+
+## 📂 Scenario: *The Orzinuovi Rush*
+
+The repository includes a real-world benchmark scenario based on a Saturday night dinner rush at *Il Cantinone*:
+- **Depot:** Piazza Vittorio Emanuele II, Orzinuovi ($45.4012^\circ\text{N}, 9.9248^\circ\text{E}$).
+- **Fleet:** 3 delivery riders (Marco, Luca, Andrea), each equipped with an 8-pizza thermal transport box.
+- **Orders:** 12 batch orders spread across Orzinuovi center, Barco, Pudiano, Coniolo, and Ovanengo, totaling 15 pizzas with staggered baking completion times.
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-Make sure you have the following installed on your local machine:
-- **Java Development Kit (JDK) 21**
-- **Maven** (The project includes a Maven Wrapper `mvnw`, so a local Maven installation is optional).
+- **Java Development Kit (JDK) 21** or later
+- **Maven 3.5+** (The repository includes the Maven Wrapper `./mvnw`, so local Maven installation is optional)
 
-### Installation & Execution
-
+### Build & Run
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/StefanM14/PizzaDelivery.git
    cd PizzaDelivery
    ```
 
-2. **Build the project:**
-   Compile the code and download the required dependencies (like Google OR-Tools).
+2. **Compile and execute test suite:**
    ```bash
-   ./mvnw clean install
+   ./mvnw clean test
    ```
 
-3. **Run the application:**
-   You can easily run the main application using the Maven Exec plugin:
+3. **Run the optimization engine:**
    ```bash
    ./mvnw exec:java
    ```
-   
-   *(Alternatively, run the `it.delivery.optimizer.App` main class from your IDE).*
+   *(Or run `it.delivery.optimizer.App` directly from your IDE).*
 
-4. **View the Results:**
-   Once the application has finished executing, open the generated `delivery-map.html` file in your preferred web browser to see the optimized routes!
+4. **Inspect the Output:**
+   - The CLI outputs a detailed tabular itinerary showing synchronized departure, arrival times, delivery status, and fleet metrics.
+   - Open the generated `delivery-map.html` in any browser (or view the [Live Demo](https://stefanm14.github.io/PizzaDelivery/)) to explore routes interactively.
 
-### Running Tests
-To run the JUnit 5 test suite and verify the application's integrity, execute:
-```bash
-./mvnw test
-```
+---
 
-## 🧠 How it Works
-The application models the delivery process as a Capacitated Vehicle Routing Problem (CVRP). 
-1. **Input:** The system reads delivery locations and order details.
-2. **Distance Matrix:** A matrix representing the travel cost (distance/time) between all points is generated.
-3. **Optimization:** Google OR-Tools calculates the best assignment of orders to drivers, minimizing the global cost.
-4. **Output:** The optimized routes are printed to the console and exported into a visual HTML format.
+## 🤝 Academic Context & Portfolio
 
-## 🤝 Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/StefanM14/PizzaDelivery/issues).
+This project demonstrates the practical application of **Operations Research**, **Combinatorial Algorithms**, and **Software Engineering** to modernize local commerce operations. 
+
+Developed by **Stefano Magoni** as part of an academic portfolio for graduate studies in Computer Science and Applied Optimization (ETH Zürich, EPFL, TUM, TU Delft).
 
 ## 📝 License
-This project is open-source and available under the [MIT License](LICENSE).
+Distributed under the [MIT License](LICENSE).
+
