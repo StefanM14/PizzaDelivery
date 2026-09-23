@@ -18,20 +18,13 @@ An Operations Research & Combinatorial Optimization system solving the **Vehicle
 
 ---
 
-## 📌 Origin & Real-World Motivation: *Pizzeria Il Cantinone*
+## 📌 Motivation & Case Study: *Pizzeria Il Cantinone*
 
-This project is not an abstract academic exercise or a generic toy model. It was conceived and built to solve a concrete, daily operational bottleneck at my family's business, **Pizzeria Il Cantinone**, located in my hometown of **Orzinuovi** (Brescia, Northern Italy).
+This project is inspired by my family's pizzeria, **Pizzeria Il Cantinone**, in my hometown of **Orzinuovi** (Brescia, Italy). 
 
-### The Operational Challenge in Orzinuovi
-During peak weekend dinner rush hours (19:00 – 21:30), *Il Cantinone* manages dozens of home deliveries that span both the dense historic town center and remote agricultural hamlets (*frazioni*) several kilometers away, such as **Barco**, **Pudiano**, **Coniolo**, and **Ovanengo**.
+During busy weekend dinner hours, deliveries must reach customers across the town center and nearby rural hamlets (*frazioni* such as Barco, Coniolo, Pudiano, and Ovanengo). Balancing tight delivery deadlines, driver capacities, and food temperature (aiming to deliver within ~35 minutes of baking) creates an interesting combinatorial challenge.
 
-Historically, dispatching was performed manually under high stress, leading to:
-- **Sub-optimal routing:** Drivers crisscrossing the territory and driving redundant kilometers.
-- **Thermal quality degradation:** Artisan pizzas cooling down in transit if routes exceeded 30–35 minutes.
-- **Kitchen desynchronization:** Drivers departing before batches were fully baked, or pizzas waiting under heat lamps.
-- **Customer tardiness:** Deliveries arriving outside promised time slots during peak oven bottlenecks.
-
-To solve this, I designed and implemented this automated optimization engine, formulating *Il Cantinone*'s operations as a multi-constrained **Capacitated Vehicle Routing Problem with Time Windows (CVRPTW)** backed by real road network topology.
+I used our pizzeria's setting as a concrete case study to model and test a **Capacitated Vehicle Routing Problem with Time Windows (CVRPTW)** using real road network data.
 
 ---
 
@@ -118,11 +111,9 @@ The repository includes a real-world benchmark scenario based on a Saturday nigh
 
 ---
 
-## 🤝 Academic Context & Portfolio
+## 🤝 Author & Academic Context
 
-This project demonstrates the practical application of **Operations Research**, **Combinatorial Algorithms**, and **Software Engineering** to modernize local commerce operations. 
-
-Developed by **Stefano Magoni** as part of an academic portfolio for graduate studies in Computer Science and Applied Optimization (ETH Zürich, EPFL, TUM, TU Delft).
+Developed by **Stefano Magoni** as a project exploring practical applications of **Operations Research**, **Combinatorial Optimization**, and **Software Engineering**.
 
 ## 📝 License
 Distributed under the [MIT License](LICENSE).
