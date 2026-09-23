@@ -109,12 +109,6 @@ The repository includes a real-world benchmark scenario based on a Saturday nigh
    - The CLI outputs a detailed tabular itinerary showing synchronized departure, arrival times, delivery status, and fleet metrics.
    - Open the generated `delivery-map.html` in any browser (or view the [Live Demo](https://stefanm14.github.io/PizzaDelivery/)) to explore routes interactively.
 
----
-
-## 🤝 Author & Academic Context
-
-Developed by **Stefano Magoni** as a project exploring practical applications of **Operations Research**, **Combinatorial Optimization**, and **Software Engineering**.
-
 ## 📝 License
-Distributed under the [MIT License](LICENSE).
+This project has no license.
 
